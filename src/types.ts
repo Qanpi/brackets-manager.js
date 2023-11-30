@@ -3,7 +3,7 @@ import { Group, Id, Match, MatchGame, Participant, Round, SeedOrdering, Stage } 
 /**
  * Type of an object implementing every ordering method.
  */
-export type OrderingMap = Record<SeedOrdering, <T>(array: T[], ...args: number[]) => T[]>;
+export type OrderingMap = Record<SeedOrdering | 'copa', <T>(array: T[], ...args: number[]) => T[]>;
 
 /**
  * Omits the `id` property of a type.

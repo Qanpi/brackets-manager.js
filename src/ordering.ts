@@ -53,6 +53,29 @@ export const ordering: OrderingMap = {
 
         return result;
     },
+    //FIXME: needs to implement manual ordering!
+    'copa': <T> (array: T[]) => {
+        //1 - 4
+        //5 - 8 
+
+        //2 - 3
+        //6 - 7
+        const result: T[] = [];
+
+        const step = 2;
+        //hop every 2 groups
+        for (let i=0; i<array.length; i+= step * 2) {
+            //take the last participant from next group
+            result.push(array[i], array[i+step+(step-1)]);
+        }
+
+        for (let i=2; i<array.length; i+= step * 2) {
+            //take the first participant from prev group
+            result.push(array[i], array[i-1]);
+        }
+
+        return result;
+    },
     'groups.effort_balanced': <T>(array: T[], groupCount: number) => {
         const result: T[] = [];
         let i = 0, j = 0;

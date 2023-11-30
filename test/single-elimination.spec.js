@@ -41,6 +41,29 @@ describe('Create single elimination stage', () => {
         assert.strictEqual((await storage.select('match')).length, 15);
     });
 
+    it.only('should create a single elimination stage with custom copa seed ordering', async () => {
+        const example = {
+            name: 'Example',
+            tournamentId: 0,
+            type: 'single_elimination',
+            seeding: [
+                'Team 1', 'Team 2',
+                'Team 3', 'Team 4',
+                'Team 5', 'Team 6',
+                'Team 7', 'Team 8',
+                'Team 9', 'Team 10',
+                'Team 11', 'Team 12',
+                'Team 13', 'Team 14',
+                'Team 15', 'Team 16',
+            ],
+            settings: { seedOrdering: ['copa'] },
+        };
+
+        await manager.create.stage(example);
+
+        const stage = await storage.select('stage', 0);
+    })
+
     it('should create a single elimination stage with BYEs', async () => {
         await manager.create.stage({
             name: 'Example with BYEs',
